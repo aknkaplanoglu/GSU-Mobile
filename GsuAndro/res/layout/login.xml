@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent">
+
+        <TextView
+                android:textSize="35dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/login_textview_titletext"
+                android:id="@+id/login_textview_title" android:layout_marginLeft="15dp" android:layout_marginTop="15dp"
+                android:layout_marginRight="15dp" android:autoText="false"
+                android:gravity="center"/>
+        <edu.example.androproject.widget.TextViewError
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/login_textfield_errortext"
+                android:id="@+id/login_textview_error" android:layout_marginLeft="15dp" android:layout_marginRight="15dp"
+                android:layout_marginTop="15dp" android:layout_gravity="bottom" android:visibility="invisible"/>
+        <edu.example.androproject.widget.EditTextValidatedName
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/login_editText_name" android:layout_marginTop="15dp" android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp" android:hint="@string/name_textfield_hinttext" android:editable="true"/>
+        <edu.example.androproject.widget.EditTextValidatedPassword
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/login_editText_password" android:layout_marginTop="30dp" android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp" android:hint="@string/password_textfield_hinttext" android:password="true"/>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_buttontxt"
+                android:id="@+id/login_button_login" android:layout_gravity="center_horizontal" android:layout_marginTop="45dp"
+                android:layout_marginLeft="75dp" android:layout_marginRight="75dp"/>
+        <Button
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/createaccount"
+                android:id="@+id/login_createaccount_button" android:layout_gravity="center_horizontal" android:layout_marginLeft="75dp"
+                android:layout_marginTop="15dp" android:layout_marginRight="75dp"/>
+    </LinearLayout>
+</ScrollView>

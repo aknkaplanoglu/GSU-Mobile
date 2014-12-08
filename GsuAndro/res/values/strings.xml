@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Login</string>
+    <string name="name_textfield_hinttext">YourName</string>
+    <string name="password_textfield_hinttext">Password</string>
+    <string name="login_buttontxt">Login</string>
+    <string name="login_textfield_errortext">Impossible to connect to the server</string>
+    <string name="login_textview_titletext">Login</string>
+    <string name="login_name_emptyerror">Name cannot be empty</string>
+    <string name="login_password_error">Password cannot be empty</string>
+    <string name="login_name_shorterror">Password is short must have 5 character minum</string>
+    <string name="account_textview_titletext">Create Account</string>
+    <string name="confirmpassword_textfield_hinttext">Confirm Password</string>
+    <string name="email_textfield_hinttext">Your Email</string>
+    <string name="account_email_emptyerror">Insert a valid mail</string>
+    <string name="account_email_formaterror">Email must be like this name@provider.com</string>
+    <string name="account_confirmpassword_error">Password and confirm password must be th same</string>
+    <string name="login_failure">There was an error with the login retry!</string>
+    <string name="login_error">Impossible to connect to the server (or server return null)</string>
+    <string name="progress_dialog_text">Loading...</string>
+    <string name="progressbar_text">Loading ...</string>
+    <string name="createaccount">Create account</string>
+</resources>

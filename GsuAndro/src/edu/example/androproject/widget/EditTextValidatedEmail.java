@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import com.example.login.R;
 
-//This class is not used but if you wanna use it to manage the user field of login you can!!
 public class EditTextValidatedEmail extends EditTextValidated {
 
 

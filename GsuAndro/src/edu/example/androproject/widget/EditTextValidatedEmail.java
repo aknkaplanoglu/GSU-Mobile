@@ -22,6 +22,7 @@ public class EditTextValidatedEmail extends EditTextValidated {
 
         if(!isValidEmail(this.getText().toString())){
             this.setError(context.getString(R.string.account_email_formaterror));
+
             return false;
         }
 

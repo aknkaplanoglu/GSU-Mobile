@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Longitude"
+            android:id="@+id/textView2" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+            android:layout_marginTop="129dp"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Latitude"
+            android:id="@+id/textView3" android:layout_below="@+id/textView2" android:layout_alignParentLeft="true"
+            android:layout_marginTop="43dp"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/longitude" android:layout_above="@+id/textView3" android:layout_centerHorizontal="true"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/latitude" android:layout_alignTop="@+id/textView3" android:layout_centerHorizontal="true"/>
+</RelativeLayout>

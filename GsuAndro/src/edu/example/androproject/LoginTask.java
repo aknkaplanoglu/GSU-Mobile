@@ -1,9 +1,6 @@
 package edu.example.androproject;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
 import android.util.Log;
-import com.loopj.android.http.AsyncHttpClient;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -53,7 +50,7 @@ public abstract class LoginTask extends AsyncLoginTask {
         HttpGet httpGet=new HttpGet(baseUrl + "/islogin/" + name + "/" + pass);
         String text;
         try {
-            String telImei = LoginActivity.getInstance().getTelImei();
+//            String telImei = LoginActivity.getInstance().getTelImei();
 
             HttpResponse response = httpClient.execute(httpGet, localContext);
 

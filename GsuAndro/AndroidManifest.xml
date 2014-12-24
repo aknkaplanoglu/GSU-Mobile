@@ -5,8 +5,12 @@
           android:versionName="1.0">
     <uses-sdk android:minSdkVersion="14"/>
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- Use GPS for device location -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <!-- Use Wi-Fi or mobile connection for device location -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
         <activity android:name="edu.example.androproject.LoginActivity"
@@ -15,6 +19,11 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+
+        <activity
+                android:name="edu.example.androproject.LocationActivity"
+                android:label="@string/app_name">
         </activity>
     </application>
 </manifest>

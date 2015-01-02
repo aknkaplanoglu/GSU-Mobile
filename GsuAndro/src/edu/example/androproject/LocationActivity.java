@@ -3,8 +3,7 @@ package edu.example.androproject;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.login.R;
 
@@ -17,28 +16,28 @@ import java.util.TimerTask;
 public class LocationActivity extends Activity {
 
     GpsTracker gpsTracker;
-    EditText editLong;
-    EditText editLat;
+    TextView editLong;
+    TextView editLat;
+    double latitude;
+    double longitude;
 
-    private static final int scheduledTime = 60 * 1000; // one minute
+    private static final int scheduledTime = 5 * 1000; // one minute
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.location);
 
-        editLat = (EditText) findViewById(R.id.latitude);
-        editLong = (EditText) findViewById(R.id.longitude);
+        editLat = (TextView) findViewById(R.id.latitude);
+        editLong = (TextView) findViewById(R.id.longitude);
 
         gpsTracker = new GpsTracker(LocationActivity.this);
 
         if (gpsTracker.canGetLocation) {
 
-            final double latitude = gpsTracker.getLatitude();
-            final double longitude = gpsTracker.getLongitude();
+            System.out.println(latitude);
 
-            editLong.setText(String.valueOf(longitude));
-            editLat.setText(String.valueOf(latitude));
+
 
             Toast.makeText(getApplicationContext(), "Your location is - \nLat:" + latitude + "\nLong:" + longitude, Toast.LENGTH_LONG).show();
 
@@ -49,12 +48,18 @@ public class LocationActivity extends Activity {
                 public void run() {
                     handler.post(new Runnable() {
                         public void run() {
-                            new LocationTask(longitude, latitude) {
-                                @Override
-                                public void onFailure() {
-                                    Log.d("DEBUG", "onFailure");
-                                }
-                            }.execute();
+                            gpsTracker = new GpsTracker(LocationActivity.this);
+                            latitude = gpsTracker.getLatitude();
+                            longitude = gpsTracker.getLongitude();
+                            editLong.setText(String.valueOf(longitude));
+                            editLat.setText(String.valueOf(latitude));
+                            Toast.makeText(getApplicationContext(), "Your location1111 is - \nLat:" + latitude + "\nLong:" + longitude, Toast.LENGTH_LONG).show();
+                            //   new LocationTask(longitude, latitude) {
+                            //      @Override
+                            //     public void onFailure() {
+                            //       Log.d("DEBUG", "onFailure");
+                            // }
+                            //}.execute();
 
                         }
                     });

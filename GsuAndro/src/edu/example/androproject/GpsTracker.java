@@ -28,9 +28,9 @@ public class GpsTracker extends Service implements LocationListener {
     double longitude;
     double latitude;
 
-    private static final long MIN_DISTANCE_CHANGES_FOR_UPDATES = 10;//10 METERS
+    private static final long MIN_DISTANCE_CHANGES_FOR_UPDATES = 1;//1 METERS
 
-    private static final long MIN_TIME_BETWEEN_UPDATES = 1000 * 60; //1 MINUTE
+    private static final long MIN_TIME_BETWEEN_UPDATES = 1000 * 3; //1 MINUTE
 
     protected LocationManager locationManager;
 
@@ -47,14 +47,14 @@ public class GpsTracker extends Service implements LocationListener {
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if (!isNetworkEnabled && !isGPSEnabled) {
-                //doldurulacak
+                System.out.println("GPS VE NETWORK YOK");
             } else {
 
                 this.canGetLocation = true;
 
-                if (isNetworkEnabled) {
+                if (isGPSEnabled) {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGES_FOR_UPDATES, this);
-                    Log.d("NETWORK ENABLED", "NETWORK ENABLED");
+                    Log.d("GPS ENABLED", "GPS ENABLED");
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         if (location != null) {
@@ -62,20 +62,21 @@ public class GpsTracker extends Service implements LocationListener {
                             latitude = location.getLatitude();
                         }
                     }
+
                 }
-                if (isGPSEnabled) {
+
+                if (isNetworkEnabled) {
                     if (location == null) {
-                        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGES_FOR_UPDATES, this);
-                        Log.d("GPS ENABLED", "GPS ENABLED");
+                        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGES_FOR_UPDATES, this);
+                        Log.d("NETWORK ENABLED", "NETWORK ENABLED");
                         if (locationManager != null) {
-                            location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                             if (location != null) {
                                 longitude = location.getLongitude();
                                 latitude = location.getLatitude();
                             }
                         }
                     }
-
                 }
             }
         } catch (Exception e) {

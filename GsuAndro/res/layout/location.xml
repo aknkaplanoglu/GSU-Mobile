@@ -15,12 +15,16 @@
             android:text="Latitude"
             android:id="@+id/textView3" android:layout_below="@+id/textView2" android:layout_alignParentLeft="true"
             android:layout_marginTop="43dp"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/longitude" android:layout_above="@+id/textView3" android:layout_centerHorizontal="true"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/latitude" android:layout_alignTop="@+id/textView3" android:layout_centerHorizontal="true"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="longitude"
+                android:id="@+id/longitude" android:layout_alignTop="@+id/textView2"
+                android:layout_centerHorizontal="true"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="latitude"
+                android:id="@+id/latitude" android:layout_alignBottom="@+id/textView3"
+                android:layout_alignLeft="@+id/longitude"/>
 </RelativeLayout>

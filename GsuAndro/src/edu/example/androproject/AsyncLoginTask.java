@@ -18,7 +18,7 @@ import java.io.InputStreamReader;
 public abstract class AsyncLoginTask extends AsyncTask {
 
     protected JSONObject resp = null;
-
+    protected String resp_ = null;
     protected final String baseUrl;
 
     protected AsyncLoginTask() {

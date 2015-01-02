@@ -35,6 +35,7 @@ public class LoginActivity extends Activity {
 
                 if (getPasswordEditText().validate(false) & getNameEditText().validate(false)) {
                     login();
+                    Log.d("loginden sonra", "loginden sonra");
                 }
             }
         });
@@ -83,16 +84,15 @@ public class LoginActivity extends Activity {
             protected void onPostExecute(Object o) {
                 super.onPostExecute(o);
 
-
                 hideProgressDialog();
 
                 //this logic depends on what my server return, know if the server return null
-                if (o == null || o == "false" || !(Boolean) o || !((Boolean) o).booleanValue()) {
-                    getErrorTextView().manageTextViewError(getString(R.string.login_error));
+                if (o == null || o.equals("f")) {
+                    getErrorTextView().manageTextViewError(getString(R.string.login_error)); //|| !(Boolean) o || !((Boolean) o).booleanValue()
 
                 } else {
                     //Result JSON passed can contain something I need about the user logged.
-                    setUserAsLogged((JSONObject) o);
+                    //setUserAsLogged(o);
                     Intent intent = new Intent(LoginActivity.this, LocationActivity.class);
                     startActivity(intent);
                     //here I must insert the code to execute if the login is success
@@ -136,7 +136,7 @@ public class LoginActivity extends Activity {
     private void hideProgressDialog() {
         runOnUiThread(new Runnable() {
             public void run() {
-                progressDialog.hide();
+                progressDialog.dismiss();
             }
         });
     }

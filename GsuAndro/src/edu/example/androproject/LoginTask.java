@@ -58,20 +58,22 @@ public abstract class LoginTask extends AsyncLoginTask {
            // System.out.println(baseUrl + "/islogin/" + name + "/" + pass);
             //String stringResponse = parseResponseToString(executeHttpGet(baseUrl + "/islogin/" + name + "/" + pass));
 
-           String stringResponse=getASCIIContentFromEntity(response.getEntity());
+            resp_ = getASCIIContentFromEntity(response.getEntity());
 
+            System.out.println(resp_);
 
-
-            Log.d("Stringresp",stringResponse);
-            if (isLoginSuccessfull(stringResponse)) {
-                resp = getJsonObjectFromString(stringResponse);
+            Log.d("Stringresp", resp_);
+            if (isLoginSuccessfull(resp_)) {
+                return resp_;
+                //resp = getJsonObjectFromString(stringResponse);
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             onFailure();
         }
 
-        return resp;
+        return resp_;
     }
 
 
@@ -79,7 +81,7 @@ public abstract class LoginTask extends AsyncLoginTask {
 
         if (stringResponse != null) {
             if (stringResponse != "null") {
-                if (stringResponse != "false") {
+                if (!stringResponse.equals("f")) {
                     return true;
                 }
             }

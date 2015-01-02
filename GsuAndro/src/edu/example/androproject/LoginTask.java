@@ -6,6 +6,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
@@ -45,8 +47,12 @@ public abstract class LoginTask extends AsyncLoginTask {
     @Override
     protected Object doInBackground(Object[] params) {
 
+        int timeout = 5;
         HttpClient httpClient = new DefaultHttpClient();
         HttpContext localContext = new BasicHttpContext();
+        HttpParams params_ = httpClient.getParams();
+        HttpConnectionParams.setConnectionTimeout(params_, timeout * 1000);
+        HttpConnectionParams.setSoTimeout(params_, timeout * 1000);
         HttpGet httpGet=new HttpGet(baseUrl + "/islogin/" + name + "/" + pass);
         String text;
         try {

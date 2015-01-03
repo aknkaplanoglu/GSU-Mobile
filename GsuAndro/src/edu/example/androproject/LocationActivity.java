@@ -77,7 +77,6 @@ public class LocationActivity extends Activity {
                             location.add(0, latitude);
                             location.add(1, longitude);
                             satallite.setLocation(location);
-                            location.clear();
                             editLong.setText(String.valueOf(longitude));
                             editLat.setText(String.valueOf(latitude));
                             Toast.makeText(getApplicationContext(), "Your location1111 is - \nLat:" + latitude + "\nLong:" + longitude, Toast.LENGTH_LONG).show();

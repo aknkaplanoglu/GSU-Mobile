@@ -23,7 +23,7 @@ public abstract class AsyncLoginTask extends AsyncTask {
 
     protected AsyncLoginTask() {
         //Server address and port
-        baseUrl = "http://192.168.1.8:8080/ServiceProvider/services/rest/v1";
+        baseUrl = "http://192.168.1.3:8080/ServiceProvider/services/rest/v1";
     }
 
     public abstract void onFailure();

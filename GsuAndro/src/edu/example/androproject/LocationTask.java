@@ -65,9 +65,10 @@ public abstract class LocationTask extends AsyncLoginTask {
             gpsSatallite.setLocationTime(new Date());
             Gson gson = new Gson();
             String json = gson.toJson(gpsSatallite);
+            json = "{'GpsSatallite':" + json + "}";
             System.err.println(json);
             HttpPost postRequest = new HttpPost(
-                    "http://localhost:8080/RESTfulExample/json/product/post");
+                    baseUrl + "/sendLocation");
             StringEntity stringEntity = new StringEntity(json);
             stringEntity.setContentType("application/json");
             postRequest.setEntity(stringEntity);

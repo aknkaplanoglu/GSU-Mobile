@@ -110,11 +110,12 @@ public class GpsTracker extends Service implements LocationListener {
 
                 if (isGPSEnabled) {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGES_FOR_UPDATES, this);
+
                     Log.d("GPS ENABLED", "GPS ENABLED");
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                         //Satallite için gerekli bilgiler
-                        GpsStatus.Listener listener = new GpsStatus.Listener() {
+                        locationManager.addGpsStatusListener(new GpsStatus.Listener() {
                             @Override
                             public void onGpsStatusChanged(int i) {
                                 GpsStatus status = locationManager.getGpsStatus(null);
@@ -135,7 +136,7 @@ public class GpsTracker extends Service implements LocationListener {
                                     setTtff(status.getTimeToFirstFix());
                                 }
                             }
-                        };
+                        });
                         if (location != null) {
                             if (location.hasSpeed()) {
                                 setSpeed(location.getSpeed());
@@ -155,6 +156,10 @@ public class GpsTracker extends Service implements LocationListener {
                         if (locationManager != null) {
                             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                             if (location != null) {
+                                if (location.hasSpeed()) {
+                                    setSpeed(location.getSpeed());
+                                }
+                                setAccuracy(location.getAccuracy());
                                 longitude = location.getLongitude();
                                 latitude = location.getLatitude();
                             }
@@ -238,4 +243,6 @@ public class GpsTracker extends Service implements LocationListener {
     public IBinder onBind(Intent intent) {
         return null;
     }
+
+
 }

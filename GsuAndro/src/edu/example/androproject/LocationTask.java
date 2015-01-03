@@ -63,6 +63,7 @@ public abstract class LocationTask extends AsyncLoginTask {
         try {
             gpsSatallite.setUserName(loginActivity.getUserName());
             gpsSatallite.setLocationTime(new Date());
+            System.out.println(gpsSatallite.getLocationTime());
             Gson gson = new Gson();
             String json = gson.toJson(gpsSatallite);
             json = "{'GpsSatallite':" + json + "}";

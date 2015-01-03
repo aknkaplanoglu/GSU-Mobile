@@ -12,8 +12,9 @@
     <!-- Use Wi-Fi or mobile connection for device location -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
-    <application android:label="@string/app_name" android:icon="@drawable/ic_launcher">
-        <activity android:name="edu.example.androproject.LoginActivity"
+    <application android:label="@string/app_name" android:icon="@drawable/appicon">
+
+    <activity android:name="edu.example.androproject.LoginActivity"
                   android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

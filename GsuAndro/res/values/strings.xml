@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Location</string>
+    <string name="app_name">GSU LOC</string>
     <string name="name_textfield_hinttext">YourName</string>
     <string name="password_textfield_hinttext">Password</string>
     <string name="login_buttontxt">Login</string>

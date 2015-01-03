@@ -5,13 +5,15 @@ import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+import android.location.*;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
+import edu.example.androproject.dto.SatalliteInfos;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Akin on 09-Dec-14.
@@ -25,8 +27,62 @@ public class GpsTracker extends Service implements LocationListener {
     boolean canGetLocation = false;
 
     Location location = null;
+    Float snr;
+    Float elevation;
+    Integer ttff;
+    Float speed;
+    Float accuracy;
     double longitude;
     double latitude;
+    List<SatalliteInfos> satalliteInfosList = new ArrayList<SatalliteInfos>();
+
+    public List<SatalliteInfos> getSatalliteInfosList() {
+        return satalliteInfosList;
+    }
+
+    public void setSatalliteInfosList(List<SatalliteInfos> satalliteInfosList) {
+        this.satalliteInfosList = satalliteInfosList;
+    }
+
+    public Float getSnr() {
+        return snr;
+    }
+
+    public void setSnr(Float snr) {
+        this.snr = snr;
+    }
+
+    public Float getElevation() {
+        return elevation;
+    }
+
+    public void setElevation(Float elevation) {
+        this.elevation = elevation;
+    }
+
+    public Integer getTtff() {
+        return ttff;
+    }
+
+    public void setTtff(Integer ttff) {
+        this.ttff = ttff;
+    }
+
+    public Float getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Float speed) {
+        this.speed = speed;
+    }
+
+    public Float getAccuracy() {
+        return accuracy;
+    }
+
+    public void setAccuracy(Float accuracy) {
+        this.accuracy = accuracy;
+    }
 
     private static final long MIN_DISTANCE_CHANGES_FOR_UPDATES = 1;//1 METERS
 
@@ -57,7 +113,34 @@ public class GpsTracker extends Service implements LocationListener {
                     Log.d("GPS ENABLED", "GPS ENABLED");
                     if (locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        //Satallite için gerekli bilgiler
+                        GpsStatus.Listener listener = new GpsStatus.Listener() {
+                            @Override
+                            public void onGpsStatusChanged(int i) {
+                                GpsStatus status = locationManager.getGpsStatus(null);
+                                if (i == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
+                                    Iterable<GpsSatellite> gpsSatellites = status.getSatellites();
+                                    for (GpsSatellite gpsSatellite : gpsSatellites) {
+                                        SatalliteInfos satalliteInfos = new SatalliteInfos();
+                                        //For signal to noise ratio
+                                        satalliteInfos.setSnr(gpsSatellite.getSnr());
+                                        satalliteInfos.setElevation(gpsSatellite.getElevation());
+                                        satalliteInfos.setPrn(gpsSatellite.getPrn());
+                                        satalliteInfosList.add(satalliteInfos);
+                                    }
+                                    setSatalliteInfosList(satalliteInfosList);
+
+                                }
+                                if (i == GpsStatus.GPS_EVENT_FIRST_FIX) {
+                                    setTtff(status.getTimeToFirstFix());
+                                }
+                            }
+                        };
                         if (location != null) {
+                            if (location.hasSpeed()) {
+                                setSpeed(location.getSpeed());
+                            }
+                            setAccuracy(location.getAccuracy()); //Lower the integer better the accuracy.
                             longitude = location.getLongitude();
                             latitude = location.getLatitude();
                         }

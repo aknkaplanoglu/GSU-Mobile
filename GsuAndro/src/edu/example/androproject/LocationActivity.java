@@ -3,10 +3,15 @@ package edu.example.androproject;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.login.R;
+import edu.example.androproject.dto.GpsSatallite;
+import edu.example.androproject.dto.SatalliteInfos;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -20,6 +25,12 @@ public class LocationActivity extends Activity {
     TextView editLat;
     double latitude;
     double longitude;
+    Float snr;
+    Float elevation;
+    Integer ttff;
+    Float speed;
+    Float accuracy;
+    List<SatalliteInfos> satalliteInfosList;
 
     private static final int scheduledTime = 5 * 1000; // one minute
 
@@ -48,18 +59,34 @@ public class LocationActivity extends Activity {
                 public void run() {
                     handler.post(new Runnable() {
                         public void run() {
+                            GpsSatallite satallite = new GpsSatallite();
                             gpsTracker = new GpsTracker(LocationActivity.this);
                             latitude = gpsTracker.getLatitude();
                             longitude = gpsTracker.getLongitude();
+                            elevation = gpsTracker.getElevation();
+                            snr = gpsTracker.getSnr();
+                            speed = gpsTracker.getSpeed();
+                            accuracy = gpsTracker.getAccuracy();
+                            satalliteInfosList = gpsTracker.getSatalliteInfosList();
+                            ttff = gpsTracker.getTtff();
+                            satallite.setAccuracy(accuracy);
+                            satallite.setSpeed(speed);
+                            satallite.setTimeToFirstFix(ttff);
+                            satallite.setSatalliteInfoses(satalliteInfosList);
+                            List<Double> location = new ArrayList<Double>();
+                            location.add(0, latitude);
+                            location.add(1, longitude);
+                            satallite.setLocation(location);
+                            location.clear();
                             editLong.setText(String.valueOf(longitude));
                             editLat.setText(String.valueOf(latitude));
                             Toast.makeText(getApplicationContext(), "Your location1111 is - \nLat:" + latitude + "\nLong:" + longitude, Toast.LENGTH_LONG).show();
-                            //   new LocationTask(longitude, latitude) {
-                            //      @Override
-                            //     public void onFailure() {
-                            //       Log.d("DEBUG", "onFailure");
-                            // }
-                            //}.execute();
+                            new LocationTask(satallite) {
+                                @Override
+                                public void onFailure() {
+                                    Log.d("DEBUG", "onFailure");
+                                }
+                            }.execute();
 
                         }
                     });

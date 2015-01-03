@@ -119,7 +119,6 @@ public class GpsTracker extends Service implements LocationListener {
                             @Override
                             public void onGpsStatusChanged(int i) {
                                 GpsStatus status = locationManager.getGpsStatus(null);
-                                if (i == GpsStatus.GPS_EVENT_SATELLITE_STATUS) {
                                     Iterable<GpsSatellite> gpsSatellites = status.getSatellites();
                                     for (GpsSatellite gpsSatellite : gpsSatellites) {
                                         SatalliteInfos satalliteInfos = new SatalliteInfos();
@@ -131,10 +130,7 @@ public class GpsTracker extends Service implements LocationListener {
                                     }
                                     setSatalliteInfosList(satalliteInfosList);
 
-                                }
-                                if (i == GpsStatus.GPS_EVENT_FIRST_FIX) {
                                     setTtff(status.getTimeToFirstFix());
-                                }
                             }
                         });
                         if (location != null) {

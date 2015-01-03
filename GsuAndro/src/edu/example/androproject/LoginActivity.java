@@ -44,10 +44,9 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View view) {
 
-                //GOTO CreateAccount Activity
 
-                //startActivity(new Intent(LoginActivity.this,CreateAccountActivity.class));
-                //finish();
+                startActivity(new Intent(LoginActivity.this, CreateNewUserActivity.class));
+                finish();
             }
         });
     }

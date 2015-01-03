@@ -26,5 +26,10 @@
                 android:name="edu.example.androproject.LocationActivity"
                 android:label="@string/app_name">
         </activity>
+
+        <activity
+                android:name="edu.example.androproject.CreateNewUserActivity"
+                android:label="@string/app_name">
+        </activity>
     </application>
 </manifest>

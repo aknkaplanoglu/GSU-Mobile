@@ -26,13 +26,14 @@ public class LocationActivity extends Activity {
     double latitude;
     double longitude;
     Float snr;
+    String tip;
     Float elevation;
     Integer ttff;
     Float speed;
     Float accuracy;
     List<SatalliteInfos> satalliteInfosList;
 
-    private static final int scheduledTime = 5 * 1000; // one minute
+    private static final int scheduledTime = 5 * 1000; // five seconds
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +65,7 @@ public class LocationActivity extends Activity {
                             latitude = gpsTracker.getLatitude();
                             longitude = gpsTracker.getLongitude();
                             elevation = gpsTracker.getElevation();
+                            tip = gpsTracker.getTip();
                             snr = gpsTracker.getSnr();
                             speed = gpsTracker.getSpeed();
                             accuracy = gpsTracker.getAccuracy();
@@ -72,6 +74,7 @@ public class LocationActivity extends Activity {
                             satallite.setAccuracy(accuracy);
                             satallite.setSpeed(speed);
                             satallite.setTimeToFirstFix(ttff);
+                            satallite.setTip(tip);
                             satallite.setSatalliteInfoses(satalliteInfosList);
                             List<Double> location = new ArrayList<Double>();
                             location.add(0, latitude);

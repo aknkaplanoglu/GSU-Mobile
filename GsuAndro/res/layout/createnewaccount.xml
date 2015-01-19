@@ -6,7 +6,7 @@
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                   android:orientation="vertical"
                   android:layout_width="match_parent"
-                  android:layout_height="match_parent" android:measureWithLargestChild="false">
+                  android:layout_height="match_parent" android:measureWithLargestChild="false" android:weightSum="1">
 
         <TextView
                 android:textSize="35dp"
@@ -25,23 +25,15 @@
                 android:id="@+id/login_textview_error" android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_marginTop="15dp" android:layout_gravity="bottom" android:visibility="invisible"/>
-        <edu.example.androproject.widget.EditTextValidatedName
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/username" android:layout_marginTop="15dp" android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp" android:hint="@string/name_textfield_hinttext" android:editable="true"
-                android:keepScreenOn="true" android:textColor="#ff5cff16"/>
-        <edu.example.androproject.widget.EditTextValidatedPassword
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:ems="10"
-                android:id="@+id/password" android:layout_marginTop="30dp" android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp" android:hint="@string/password_textfield_hinttext"
-                android:password="true"/>
 
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/uname" android:height="50dp" android:hint="Username"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/passwrd" android:password="true" android:height="50dp" android:hint="Password"/>
         <Button
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

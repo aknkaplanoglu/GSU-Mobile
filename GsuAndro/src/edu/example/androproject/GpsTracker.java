@@ -31,9 +31,21 @@ public class GpsTracker extends Service implements LocationListener {
     Float elevation;
     Integer ttff;
     Float speed;
+    String tip = "";
     Float accuracy;
     double longitude;
     double latitude;
+    protected int a = 0;
+
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
     List<SatalliteInfos> satalliteInfosList = new ArrayList<SatalliteInfos>();
 
     public List<SatalliteInfos> getSatalliteInfosList() {
@@ -107,7 +119,6 @@ public class GpsTracker extends Service implements LocationListener {
             } else {
 
                 this.canGetLocation = true;
-
                 if (isGPSEnabled) {
                     locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGES_FOR_UPDATES, this);
 
@@ -140,11 +151,33 @@ public class GpsTracker extends Service implements LocationListener {
                             setAccuracy(location.getAccuracy()); //Lower the integer better the accuracy.
                             longitude = location.getLongitude();
                             latitude = location.getLatitude();
+                            Location targetLocation = new Location("");
+
+                            //home adresi
+                            targetLocation.setLatitude(41.044066);
+                            targetLocation.setLongitude(29.001767);
+                            Location location1 = new Location("");
+                            float meters = location.distanceTo(targetLocation);
+                            location1.setLatitude(41.046184);
+                            location1.setLongitude(29.019879);
+                            float meters1 = location.distanceTo(location1);
+                            Location location2 = new Location("");
+                            location2.setLatitude(41.040396);
+                            location2.setLongitude(28.983070);
+                            float meters2 = location.distanceTo(location2);
+                            if (meters < 100) {
+                                tip = "ev";
+                            }
+                            if (meters1 < 100) {
+                                tip = "okul";
+                            }
+                            if (meters2 < 100) {
+                                tip = "isyeri";
+                            }
                         }
                     }
 
                 }
-
                 if (isNetworkEnabled) {
                     if (location == null) {
                         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BETWEEN_UPDATES, MIN_DISTANCE_CHANGES_FOR_UPDATES, this);
@@ -158,6 +191,30 @@ public class GpsTracker extends Service implements LocationListener {
                                 setAccuracy(location.getAccuracy());
                                 longitude = location.getLongitude();
                                 latitude = location.getLatitude();
+
+                                Location targetLocation = new Location("");
+
+                                //home adresi
+                                targetLocation.setLatitude(41.044066);
+                                targetLocation.setLongitude(29.001767);
+                                Location location1 = new Location("");
+                                float meters = location.distanceTo(targetLocation);
+                                location1.setLatitude(41.046184);
+                                location1.setLongitude(29.019879);
+                                float meters1 = location.distanceTo(location1);
+                                Location location2 = new Location("");
+                                location2.setLatitude(41.040396);
+                                location2.setLongitude(28.983070);
+                                float meters2 = location.distanceTo(location2);
+                                if (meters < 100) {
+                                    tip = "ev";
+                                }
+                                if (meters1 < 100) {
+                                    tip = "okul";
+                                }
+                                if (meters2 < 100) {
+                                    tip = "isyeri";
+                                }
                             }
                         }
                     }

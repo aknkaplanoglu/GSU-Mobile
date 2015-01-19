@@ -14,13 +14,16 @@ import org.apache.http.protocol.HttpContext;
 import java.io.IOException;
 import java.io.InputStream;
 
-public abstract class LoginTask extends AsyncLoginTask {
+/**
+ * Created by Akin on 14-Jan-15.
+ */
+public class CreateNewUserTask extends AsyncLoginTask {
 
     private String name;
     private String pass;
 
 
-    public LoginTask(String name, String pass) {
+    public CreateNewUserTask(String name, String pass) {
         this.name = name;
         this.pass = pass;
     }
@@ -31,21 +34,25 @@ public abstract class LoginTask extends AsyncLoginTask {
 
         StringBuffer out = new StringBuffer();
         int n = 1;
-        while (n>0) {
+        while (n > 0) {
             byte[] b = new byte[4096];
-            n =  in.read(b);
+            n = in.read(b);
 
 
-            if (n>0) out.append(new String(b, 0, n));
+            if (n > 0) out.append(new String(b, 0, n));
         }
 
 
         return out.toString();
     }
 
+    @Override
+    public void onFailure() {
+
+    }
 
     @Override
-    protected Object doInBackground(Object[] params) {
+    protected Object doInBackground(Object[] objects) {
 
         int timeout = 20;
         HttpClient httpClient = new DefaultHttpClient();
@@ -53,7 +60,7 @@ public abstract class LoginTask extends AsyncLoginTask {
         HttpParams params_ = httpClient.getParams();
         HttpConnectionParams.setConnectionTimeout(params_, timeout * 1000);
         HttpConnectionParams.setSoTimeout(params_, timeout * 1000);
-        HttpGet httpGet=new HttpGet(baseUrl + "/islogin/" + name + "/" + pass);
+        HttpGet httpGet = new HttpGet(baseUrl + "/giveRole/" + name + "/" + pass + "/user");
         String text;
         try {
 //            String telImei = LoginActivity.getInstance().getTelImei();
@@ -61,7 +68,7 @@ public abstract class LoginTask extends AsyncLoginTask {
             HttpResponse response = httpClient.execute(httpGet, localContext);
 
             //Mod the request to fit your server.
-           // System.out.println(baseUrl + "/islogin/" + name + "/" + pass);
+            // System.out.println(baseUrl + "/islogin/" + name + "/" + pass);
             //String stringResponse = parseResponseToString(executeHttpGet(baseUrl + "/islogin/" + name + "/" + pass));
 
             resp_ = getASCIIContentFromEntity(response.getEntity());
@@ -82,7 +89,6 @@ public abstract class LoginTask extends AsyncLoginTask {
         return resp_;
     }
 
-
     private boolean isLoginSuccessfull(String stringResponse) {
 
         if (stringResponse != null) {
@@ -94,5 +100,4 @@ public abstract class LoginTask extends AsyncLoginTask {
         }
         return false;
     }
-
 }
